@@ -33,7 +33,7 @@ export class AuthResolver {
 
     user.lastLogin = Date.now()
     await user.save();
-    return getToken(user._id)
+    return getToken(user._id, user.roles)
   }
 
 }

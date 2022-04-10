@@ -17,9 +17,25 @@ input EditUserInput {
   password: String
 }
 
+type Game {
+  _id: ObjectId!
+  description: String!
+  image: String!
+  name: String!
+}
+
+input GameInput {
+  description: String!
+  image: String!
+  name: String!
+}
+
 type Mutation {
+  createGame(data: GameInput!): Game!
   createUser(data: CreateUserInput!): User!
+  deleteGame(_id: String!): Game!
   deleteUser(_id: String!): User!
+  editGame(_id: String!, data: GameInput!): Game!
   editUser(_id: String!, data: EditUserInput!): User!
   login(email: String!, password: String!): String!
 }
@@ -29,6 +45,8 @@ scalar ObjectId
 
 type Query {
   currentUser: User!
+  game(_id: String!): Game!
+  games: [Game!]!
   user(_id: String!): User!
   users: [User!]!
 }
@@ -37,7 +55,9 @@ type User {
   _id: ObjectId!
   email: String!
   firstName: String!
+  games: [Game!]!
   lastLogin: Float!
   lastName: String!
   password: String!
+  roles: [String!]!
 }
