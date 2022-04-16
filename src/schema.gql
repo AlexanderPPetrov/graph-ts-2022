@@ -3,6 +3,12 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input BaseGameInput {
+  description: String!
+  image: String!
+  name: String!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String!
@@ -33,7 +39,7 @@ input GameInput {
 }
 
 type Mutation {
-  createGame(data: GameInput!): Game!
+  createGame(data: BaseGameInput!): Game!
   createUser(data: CreateUserInput!): User!
   deleteGame(_id: String!): Game!
   deleteUser(_id: String!): User!

@@ -1,7 +1,7 @@
 import { Resolver, Query, Mutation, Arg, Authorized } from "type-graphql";
 import { Game, GameModel } from "../../entities/game-entity";
 import { UserRoles } from "../user/user-roles";
-import { GameInput } from "./game-arguments";
+import { BaseGameInput, GameInput } from "./game-arguments";
 
 @Resolver()
 export class GameResolver {
@@ -17,13 +17,13 @@ export class GameResolver {
   }
 
   @Mutation(returns => Game)
-  async createGame(@Arg("data") data: GameInput):Promise<Game> {
+  async createGame(@Arg("data") data: BaseGameInput):Promise<Game> {
     const newUser = new GameModel(data);
     await newUser.save();
     return newUser
   }
 
-  @Authorized([UserRoles.ADMIN, UserRoles.SUPER_ADMIN])
+  // @Authorized([UserRoles.ADMIN, UserRoles.SUPER_ADMIN])
   @Mutation(returns => Game)
   async deleteGame(@Arg("_id") _id: string):Promise<Game> {
     return await GameModel.findByIdAndRemove(_id);
