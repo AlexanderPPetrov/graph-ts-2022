@@ -1,4 +1,4 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, InputType, Field } from "type-graphql";
 import { prop as Prop, getModelForClass } from "@typegoose/typegoose"
 import { ObjectId } from "mongodb"
 
@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb"
 export class Game {
 
   @Field()
-  _id: ObjectId;
+  readonly _id: ObjectId;
 
   @Prop({required: true})
   @Field()
@@ -21,4 +21,4 @@ export class Game {
   image: string;
 }
 
-export const GameModel = getModelForClass(Game)
+export const GameModel = getModelForClass(Game, { schemaOptions: { timestamps: true }})

@@ -1,6 +1,6 @@
 import { MaxLength, MinLength, IsEmail } from "class-validator";
 import { Field, InputType } from "type-graphql";
-
+import { GameInput } from "../game/game-arguments";
 @InputType()
 export class CreateUserInput {
   @Field()
@@ -38,4 +38,7 @@ export class EditUserInput {
   @Field({nullable: true})
   @MinLength(6)
   password?: string;
+  
+  @Field(type => [GameInput])
+  games?: GameInput[]
 }
