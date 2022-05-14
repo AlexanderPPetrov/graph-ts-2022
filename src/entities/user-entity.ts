@@ -36,11 +36,9 @@ export class User {
   @Prop({default: []})
   games?: Game[]
 
-  @Authorized([UserRoles.SUPER_ADMIN])
   @Field(type => [String])
   @Prop({default: [UserRoles.USER]})
   roles?: string[]
-
 }
 
 export const UserModel = getModelForClass(User, { schemaOptions: { timestamps: true }})

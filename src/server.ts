@@ -26,7 +26,6 @@ const auth = jwt({
     credentialsRequired: false,
 })
 
-
 mongoose.connect(dbUrl, {
     autoIndex: true,
   }).then(() => {
